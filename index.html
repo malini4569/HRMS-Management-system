@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HRMS Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>HRMS</h2>
+        <a href="register.html" class="btn">Register</a>
+        <a href="applyLeave.html" class="btn"><i class="icon-edit"></i>Apply Leave</a>
+        <a href="login.html" class="btn"><i class="icon-logout"></i>Logout</a>
+    </div>
+    <div class="main">
+        <div class="dashboard">
+          <h1>Dashboard</h1>
+          <div class="cards">
+            <div class="card"><h3>Total Leaves</h3><p id="totalLeaves">0</p></div>
+            <div class="card"><h3>Pending Leaves</h3><p id="pendingLeaves">0</p></div>
+            <div class="card"><h3>Approved Leaves</h3><p id="approvedLeaves">0</p></div>
+          </div>
+          <script>
+            // Get leave data from localStorage
+    let leaves = JSON.parse(localStorage.getItem("leaves")) || [];
+
+// Calculate stats
+let total = 5;
+let approved = leaves.filter(leave => leave.status === "Approved").length;
+let pending = leaves.filter(leave => leave.status === "Pending").length;
+
+// Update dashboard cards
+document.getElementById("totalLeaves").textContent = total;
+document.getElementById("approvedLeaves").textContent = approved;
+document.getElementById("pendingLeaves").textContent = pending;
+
+// Populate table
+const tableBody = document.getElementById("leaveTableBody");
+leaves.forEach(leave => {
+  let row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td>${leave.employee}</td>
+    <td>${leave.type}</td>
+    <td>${leave.from}</td>
+    <td>${leave.to}</td>
+    <td class="${leave.status === 'Approved' ? 'status-approved' : 'status-pending'}">${leave.status}</td>
+  `;
+  tableBody.appendChild(row);
+});
+          </script>
+          
+</body>
+</html>
