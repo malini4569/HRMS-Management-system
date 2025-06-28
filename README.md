@@ -1,4 +1,4 @@
-# HRMS Leave Management System
+# HR Leave Management System
 
 This is a simple web-based **Leave Management System** built using **HTML, CSS, JavaScript**, and **localStorage** (for simulation purposes). It allows employees to apply for leaves and managers/admins to approve or reject them.
 
